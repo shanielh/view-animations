@@ -25,7 +25,7 @@
   
         // Defines the range of Y of the given object
         targetTop         = target.offset().top,
-        targetBottom      = _top + target.height(),
+        targetBottom      = targetTop + target.height(),
 
         // Whether on screen or not
         isOnView          = targetBottom <= viewBottom && targetTop >= viewTop;
@@ -40,14 +40,13 @@
     * @desc When called, calls the callback when 
     * the element is visible for the first time.
     */
-    $.fn.onVisibile = function(callback) {
+    $.fn.onVisible = function(callback) {
 
         var target = $(this);
 
         var scrollCallback = function() {
             
             if (target.visible()) {
-                
                 win.unbind('scroll', scrollCallback); 
                 callback(target);   
             }
@@ -63,19 +62,21 @@
     * that have data-on-visible-class 
     * and adds the wanted class on the callback
     */
-    
-    $('*[data-on-visible-class]').each(function(index, item) {
+    $(function() {
         
-        var target = $(item);
+        $('*[data-on-visible-class]').each(function(index, item) {
         
-        var classToAdd = target.data('on-visible-class');
+            var target = $(item);
+            var classToAdd = target.data('on-visible-class');
+
+            var callback = function() {
+                target.addClass(classToAdd);
+            };
         
-        var callback = function() {
-            target.add(classToAdd);
-        };
+            target.onVisible(callback);
         
-        target.onVisible(callback);
+        });
         
-    })
+    });
 
 })(jQuery);
