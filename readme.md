@@ -1,7 +1,7 @@
 # What is this?
 
 Helps to create animations that starts when element becomes visible to the view 
-of the browser. [http://css-tricks.com/slide-in-as-you-scroll-down-boxes/](Like here)
+of the browser. [Like here](http://css-tricks.com/slide-in-as-you-scroll-down-boxes/)
 
 ## How to use it?
 
@@ -13,4 +13,4 @@ Two ways :
 ## Contributors 
 
 * Sam Sehnert
-* [http://css-tricks.com/slide-in-as-you-scroll-down-boxes/](This article)
+* [This article](http://css-tricks.com/slide-in-as-you-scroll-down-boxes/)
