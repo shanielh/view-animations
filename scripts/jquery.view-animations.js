@@ -27,10 +27,13 @@
         targetTop         = target.offset().top,
         targetBottom      = targetTop + target.height(),
 
-        // Whether on screen or not
-        isOnView          = targetBottom <= viewBottom && targetTop >= viewTop;
-  
+        padding           = 100,
 
+        // Whether on screen or not
+        isOnView          = 
+        (targetBottom - padding) <= viewBottom && (targetBottom - padding) >= viewTop ||
+        (targetTop + padding) <= viewBottom && (targetTop + padding) >= viewTop;
+  
         return isOnView;
 
     };
@@ -50,10 +53,11 @@
                 win.unbind('scroll', scrollCallback); 
                 callback(target);   
             }
+            
         };
 
         win.scroll(scrollCallback);
-
+        scrollCallback();
     }
     
     /**
@@ -65,8 +69,19 @@
     $(function() {
         
         $('*[data-on-visible-class]').each(function(index, item) {
-        
+                
             var target = $(item);
+            
+            var notVisibleClass = target.data('not-visible-class');
+
+            if (target.visible()) {
+                return;
+            }
+        
+            if (notVisibleClass) {
+                target.addClass(notVisibleClass);
+            }
+            
             var classToAdd = target.data('on-visible-class');
 
             var callback = function() {
